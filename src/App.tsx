@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import GuestForm from "./pages/GuestForm";
+import GuestList from "./pages/GuestList";
+import DashboardLayout from "./layouts/DashboardLayout";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/" element={<DashboardLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="guest-form" element={<GuestForm />} />
+          <Route path="guest-list" element={<GuestList />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </>
   );
 }
-
-export default App;
